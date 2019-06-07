@@ -35,12 +35,28 @@ app.get('/faq', (request, response) => {
   })
 })
 
+app.get('/faq/*', (request, response) => {
+  response.render('404', {
+    title: '404',
+    name: 'Ruth Newman',
+    errorMessage: 'Question Not Found'
+  })
+})
+
 app.get('/weather', (request, response) => {
     response.send({
       location: 'London',
       forecast: 'Warm and sunny',
       celsius: 27
     })
+})
+
+app.get('*', (request, response) => {
+  response.render('404', {
+    errorMessage: 'Page Not Found',
+    title: '404',
+    name: 'Ruth Newman'
+  })
 })
 
 app.listen(3000, () => {
