@@ -1,9 +1,48 @@
-h1, h3 {
-  text-align: center;
-  color: teal;
+body {
+  color: #436b95;
   font-family: 'Arial', sans-serif;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-img {
+h1, h3 {
+  color: #079fab;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.profileImage {
   width: 300px;
+}
+
+header a {
+  text-decoration: none;
+  color: #888;
+}
+
+header a:hover {
+  font-weight: bold;
+  color: darkblue;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+footer {
+  padding: 16px 0px;
+  margin-top: 16px;
+  border-top: 3px solid #079fab;
+}
+
+header {
+  margin-top: 16px;
+  margin-bottom: 32px;
 }

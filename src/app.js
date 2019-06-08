@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express');
 const hbs = require('hbs');
+const geocode = require('./utilities/geocode');
+const forecast = require('./utilities/forecast');
 
 const app = express()
 const publicDirPath = path.join(__dirname, '../public')
@@ -44,11 +46,38 @@ app.get('/faq/*', (request, response) => {
 })
 
 app.get('/weather', (request, response) => {
-    response.send({
-      location: 'London',
-      forecast: 'Warm and sunny',
-      celsius: 27
+  if (!request.query.city) {
+    return response.send({
+      error: 'A city name must be provided'
     })
+  }
+    geocode(request.query.city, (error, {latitude, longitude, location}) => {
+      if (error) {
+        return response.send({ error });
+      }
+      forecast(latitude, longitude, (error, forecastData) => {
+        if (error) {
+          return response.send({ error });
+        }
+        response.send({
+          forecast: forecastData,
+          location: location,
+          city: request.query.city
+        })
+      })
+    })
+})
+
+app.get('/products', (request, response) => {
+  if (!request.query.search) {
+    return response.send({
+      error: 'You must provide a search term'
+    })
+  }
+  console.log(request.query.search)
+  response.send({
+    products: []
+  })
 })
 
 app.get('*', (request, response) => {
