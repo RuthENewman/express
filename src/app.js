@@ -51,7 +51,7 @@ app.get('/weather', (request, response) => {
       error: 'A city name must be provided'
     })
   }
-    geocode(request.query.city, (error, {latitude, longitude, location}) => {
+    geocode(request.query.city, (error, {latitude, longitude, location} = {}) => {
       if (error) {
         return response.send({ error });
       }
