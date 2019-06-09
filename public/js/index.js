@@ -1,16 +1,27 @@
-// console.log('Testing this client side JS file')
+console.log('Client side JS file loaded')
 
-// fetch('http://puzzle.mead.io/puzzle')
-//   .then(response => response.json())
-//   .then(data => console.log(data))
+const weatherForm = document.querySelector('form');
+const searchInput = document.querySelector('input');
+const weatherInfo = document.querySelector('#weatherInfo');
+const weatherInfoMessage = document.querySelector('#weatherInfoMessage');
 
-fetch('http://localhost:3000/weather?city=london')
-  .then(response => response.json())
-  .then(data => {
-    if (data.error) {
-      console.log(data.error)
-    } else {
-      console.log(data.location)
-      console.log(data.forecast)
-    }
-  })
+weatherInfo.textContent = '';
+
+weatherForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  const city = searchInput.value;
+
+  weatherInfo.textContent = 'Getting the weather forecast for ' + city + '.'
+  weatherInfoMessage.textContent = '';
+  searchInput.value = '';
+  fetch('http://localhost:3000/weather?city=' + city)
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        weatherInfo.textContent = data.error;
+      } else {
+        weatherInfo.textContent = data.location;
+        weatherInfoMessage.textContent = data.forecast;
+      }
+    })
+})
