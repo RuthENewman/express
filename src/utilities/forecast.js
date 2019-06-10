@@ -15,7 +15,14 @@ const forecast = (latitude, longitude, callback) => {
                  + currentlyData.temperature
                  + ' C. There is a '
                  + currentlyData.precipProbability
-                 + '% chance of rain.' )
+                 + '% chance of rain.'
+                 + ' Daily temperature: Today\'s high of '
+                 + dailyData.data[0].temperatureHigh
+                 + ' C and a low of '
+                 + dailyData.data[0].temperatureLow
+                 + ' C.'
+
+                )
     }
   })
 }

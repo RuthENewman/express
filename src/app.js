@@ -27,7 +27,7 @@ app.get('', (request, response) => {
 
 app.get('/about', (request, response) => {
   response.render('about', {
-    title: 'About Me',
+    title: 'About',
     name: 'Ruth Newman'
   })
 })
